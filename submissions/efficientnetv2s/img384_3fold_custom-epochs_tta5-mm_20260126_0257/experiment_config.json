@@ -1,0 +1,19 @@
+{
+  "model_name": "tf_efficientnetv2_s.in21k_ft_in1k",
+  "img_size": 384,
+  "tta_variants": 5,
+  "tta_voting": "mean",
+  "ensemble_voting": "mean",
+  "custom_epoch_selection": {
+    "1": 15,
+    "2": 20,
+    "3": 19
+  },
+  "selected_fold_accuracies": {
+    "1": 82.0253164556962,
+    "2": 81.77215189873418,
+    "3": 83.29113924050633
+  },
+  "expected_mean_val_accuracy": 82.36286919831224,
+  "timestamp": "2026-01-26T02:57:01.911197"
+}
