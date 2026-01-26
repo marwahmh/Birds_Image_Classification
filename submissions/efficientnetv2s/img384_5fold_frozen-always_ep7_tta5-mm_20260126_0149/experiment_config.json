@@ -15,6 +15,8 @@
   "n_folds": 5,
   "total_epochs": 7,
   "tta_variants": 5,
+  "tta_voting": "mean",
+  "ensemble_voting": "mean",
   "train_mode": "frozen-always",
   "mean_val_accuracy": 82.61603375527427,
   "std_val_accuracy": 2.551260161659235,

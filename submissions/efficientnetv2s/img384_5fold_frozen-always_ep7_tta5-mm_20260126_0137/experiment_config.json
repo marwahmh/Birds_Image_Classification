@@ -1,0 +1,30 @@
+{
+  "model_name": "tf_efficientnetv2_s.in21k_ft_in1k",
+  "num_classes": 20,
+  "img_size": 384,
+  "batch_size": 16,
+  "use_transfer_learning": true,
+  "freeze_backbone_always": true,
+  "freeze_backbone_epochs": 7,
+  "unfreeze_epochs": 0,
+  "unfreeze_all_layers": false,
+  "unfreeze_last_n_blocks": 1,
+  "learning_rate_head": 0.001,
+  "learning_rate_backbone": 1e-05,
+  "weight_decay": 0.0001,
+  "n_folds": 5,
+  "total_epochs": 7,
+  "tta_variants": 5,
+  "tta_voting": "majority",
+  "ensemble_voting": "majority",
+  "train_mode": "frozen-always",
+  "mean_val_accuracy": 82.61603375527427,
+  "std_val_accuracy": 2.551260161659235,
+  "fold_accuracies": [
+    78.48101265822785,
+    83.12236286919831,
+    83.96624472573839,
+    86.07594936708861,
+    81.43459915611814
+  ]
+}
