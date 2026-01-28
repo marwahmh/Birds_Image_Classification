@@ -1,0 +1,13 @@
+{
+  "model_name": "swin_tiny_patch4_window7_224",
+  "img_size": 224,
+  "n_folds": 3,
+  "total_epochs": 25,
+  "mean_val_accuracy": 86.66666666666667,
+  "std_val_accuracy": 2.007658608163768,
+  "fold_accuracies": [
+    86.07594936708861,
+    89.36708860759494,
+    84.55696202531645
+  ]
+}
