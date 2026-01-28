@@ -1,0 +1,6 @@
+79.0
+
+noticed that val accuracy is already high since the beginning (it is not very reliable to stop training based on it only)
+so, i trained 15 epochs (first 5 frozen backbone, other 10 training last block of efficient net too)
+used the last epoch instead of best val epoch from each fold (more or less the same val acc)
+best acc so far

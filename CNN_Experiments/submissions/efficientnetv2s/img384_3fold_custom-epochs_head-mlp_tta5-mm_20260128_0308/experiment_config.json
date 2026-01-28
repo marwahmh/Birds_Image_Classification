@@ -1,0 +1,22 @@
+{
+  "model_name": "tf_efficientnetv2_s.in21k_ft_in1k",
+  "img_size": 384,
+  "head_type": "mlp",
+  "head_hidden_dim": 512,
+  "head_dropout": 0.3,
+  "tta_variants": 5,
+  "tta_voting": "mean",
+  "ensemble_voting": "mean",
+  "custom_epoch_selection": {
+    "1": 30,
+    "2": 26,
+    "3": 24
+  },
+  "selected_fold_accuracies": {
+    "1": 88.35443037974683,
+    "2": 88.35443037974683,
+    "3": 91.13924050632912
+  },
+  "expected_mean_val_accuracy": 89.28270042194093,
+  "timestamp": "2026-01-28T03:08:59.490809"
+}

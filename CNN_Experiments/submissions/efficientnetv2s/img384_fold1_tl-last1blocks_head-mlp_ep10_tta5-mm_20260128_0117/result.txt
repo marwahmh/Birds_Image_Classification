@@ -1,0 +1,4 @@
+78.0
+
+similar to img384_5fold_tl-last1blocks_head-mlp_ep10_tta5-mm_20260128_0100
+only differs in evaluating using only best fold model only instead of all folds 
