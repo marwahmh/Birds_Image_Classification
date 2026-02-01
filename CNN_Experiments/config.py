@@ -24,13 +24,29 @@ class Config:
     # ============================================
     # MODEL SETTINGS
     # ============================================
-    # Available EfficientNetV2 models (uncomment one):
-    model_name = 'tf_efficientnetv2_s.in21k_ft_in1k'  # EfficientNetV2-S pretrained on ImageNet
+    # Available models (uncomment one):
+    
+    # --- EfficientNetV2 models ---
+    # model_name = 'tf_efficientnetv2_s.in21k_ft_in1k'  # EfficientNetV2-S (~21.5M params, optimal: 384×384)
     # model_name = 'tf_efficientnetv2_s.in21k'
-    # model_name = 'tf_efficientnetv2_m.in21k_ft_in1k'
+    # model_name = 'tf_efficientnetv2_m.in21k_ft_in1k'  # EfficientNetV2-M (~54M params)
     # model_name = 'tf_efficientnetv2_m.in21k'
-    # model_name = 'tf_efficientnetv2_l.in21k_ft_in1k'
+    # model_name = 'tf_efficientnetv2_l.in21k_ft_in1k'  # EfficientNetV2-L (~118M params)
     # model_name = 'tf_efficientnetv2_l.in21k'
+    
+    # --- ConvNeXt models ---
+    # model_name = 'convnext_tiny.fb_in22k_ft_in1k'      # ConvNeXt-Tiny (~28.6M params, optimal: 224×224)
+    model_name = 'convnext_tiny.fb_in22k_ft_in1k_384'  # ConvNeXt-Tiny 384 (~28.6M params, optimal: 384×384)
+    # model_name = 'convnext_small.fb_in22k_ft_in1k'     # ConvNeXt-Small (~50M params, optimal: 224×224)
+    # model_name = 'convnext_small.fb_in22k_ft_in1k_384' # ConvNeXt-Small 384 (~50M params, optimal: 384×384)
+    # model_name = 'convnext_base.fb_in22k_ft_in1k'      # ConvNeXt-Base (~88.6M params, optimal: 224×224)
+    # model_name = 'convnext_base.fb_in22k_ft_in1k_384'  # ConvNeXt-Base 384 (~88.6M params, optimal: 384×384)
+    
+    # --- ConvNeXt V2 models (improved with masked autoencoder pretraining) ---
+    # model_name = 'convnextv2_tiny.fcmae_ft_in22k_in1k'      # ConvNeXtV2-Tiny (~28.6M params)
+    # model_name = 'convnextv2_tiny.fcmae_ft_in22k_in1k_384'  # ConvNeXtV2-Tiny 384
+    # model_name = 'convnextv2_base.fcmae_ft_in22k_in1k'      # ConvNeXtV2-Base (~88.6M params)
+    # model_name = 'convnextv2_base.fcmae_ft_in22k_in1k_384'  # ConvNeXtV2-Base 384
 
     num_classes = 20
     
@@ -58,7 +74,7 @@ class Config:
     # ============================================
     use_transfer_learning = True  # Enable transfer learning strategy
     freeze_backbone_epochs = 10   # Number of epochs with frozen backbone (train only head)
-    unfreeze_epochs = 20           # Number of epochs after unfreezing (fine-tune layers)
+    unfreeze_epochs = 5           # Number of epochs after unfreezing (fine-tune layers)
     # Total epochs = freeze_backbone_epochs + unfreeze_epochs
     
     # Freeze Backbone Always
@@ -68,8 +84,10 @@ class Config:
     
     # Progressive Unfreezing Strategy (only used if freeze_backbone_always=False)
     unfreeze_all_layers = False   # If True, unfreeze all layers. If False, use progressive unfreezing
-    unfreeze_last_n_blocks = 2    # Number of last blocks/stages to unfreeze (only if unfreeze_all_layers=False)
-    # For EfficientNetV2-S: typically has 7 blocks, unfreezing last 2-3 blocks is often optimal
+    unfreeze_last_n_blocks = 1    # Number of last blocks/stages to unfreeze (only if unfreeze_all_layers=False)
+    # Block counts by model (for choosing unfreeze_last_n_blocks):
+    #   - EfficientNetV2-S: 7 blocks (unfreezing last 2-3 is often optimal)
+    #   - ConvNeXt-Tiny/Small/Base: 4 stages (unfreezing last 1-2 is recommended)
     
     # ============================================
     # TRAINING HYPERPARAMETERS
@@ -82,13 +100,16 @@ class Config:
     # ============================================
     # K-FOLD CROSS VALIDATION
     # ============================================
-    n_folds = 3
+    n_folds = 5
     
     # ============================================
     # IMAGE SETTINGS
     # ============================================
-    img_size = 384  # EfficientNetV2-S optimal size
-    # More experimenting to find the best size is needed (maybe cropping using Deep learning models to fixed size)
+    # Optimal sizes by model:
+    #   - EfficientNetV2-S/M/L: 384×384 (or 480 for L)
+    #   - ConvNeXt (standard): 224×224
+    #   - ConvNeXt (*_384 variants): 384×384
+    img_size = 384  # Adjust based on model choice above
     
     # ============================================
     # TEST TIME AUGMENTATION (TTA) SETTINGS
@@ -191,17 +212,41 @@ def preset_two_stage_full(config):
     config.unfreeze_all_layers = True
     return config
 
+def preset_convnext_tiny(config):
+    """ConvNeXt-Tiny with recommended settings"""
+    config.model_name = 'convnext_tiny.fb_in22k_ft_in1k_384'  # 384×384 version for fair comparison
+    config.img_size = 384
+    config.freeze_backbone_always = False
+    config.freeze_backbone_epochs = 10
+    config.unfreeze_epochs = 10
+    config.unfreeze_all_layers = False
+    config.unfreeze_last_n_blocks = 1  # ConvNeXt has 4 stages, unfreeze last 1
+    return config
+
+def preset_convnext_tiny_224(config):
+    """ConvNeXt-Tiny 224×224 (faster, less VRAM)"""
+    config.model_name = 'convnext_tiny.fb_in22k_ft_in1k'  # 224×224 version
+    config.img_size = 224
+    config.freeze_backbone_always = False
+    config.freeze_backbone_epochs = 10
+    config.unfreeze_epochs = 10
+    config.unfreeze_all_layers = False
+    config.unfreeze_last_n_blocks = 1
+    return config
+
 
 # ============================================
 # USAGE
 # ============================================
 # In the notebook, import and use:
 #
-#   from config import Config, preset_quick_test
+#   from config import Config, preset_quick_test, preset_convnext_tiny
 #   config = Config()
 #   
 #   # Optionally apply a preset:
 #   # config = preset_quick_test(config)
+#   # config = preset_convnext_tiny(config)      # ConvNeXt-Tiny at 384×384
+#   # config = preset_convnext_tiny_224(config)  # ConvNeXt-Tiny at 224×224 (faster)
 #
 #   # Or modify individual settings:
 #   # config.batch_size = 32

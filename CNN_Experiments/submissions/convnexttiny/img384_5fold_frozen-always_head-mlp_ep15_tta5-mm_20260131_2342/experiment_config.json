@@ -1,0 +1,57 @@
+{
+  "model_name": "convnext_tiny.fb_in22k_ft_in1k_384",
+  "num_classes": 20,
+  "img_size": 384,
+  "batch_size": 16,
+  "head_type": "mlp",
+  "head_hidden_dim": 512,
+  "head_hidden_dim_2": 256,
+  "head_dropout": 0.3,
+  "use_transfer_learning": true,
+  "freeze_backbone_always": true,
+  "freeze_backbone_epochs": 15,
+  "unfreeze_epochs": 0,
+  "unfreeze_all_layers": false,
+  "unfreeze_last_n_blocks": 1,
+  "learning_rate_head": 0.001,
+  "learning_rate_backbone": 1e-05,
+  "weight_decay": 0.0001,
+  "n_folds": 5,
+  "total_epochs": 15,
+  "tta_variants": 5,
+  "tta_voting": "mean",
+  "ensemble_voting": "mean",
+  "train_mode": "frozen-always",
+  "folds_used": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "num_folds_used": 5,
+  "mean_val_accuracy": 93.92405063291139,
+  "std_val_accuracy": 1.5697109905264375,
+  "fold_accuracies": [
+    {
+      "fold": 1,
+      "acc": 95.35864978902954
+    },
+    {
+      "fold": 2,
+      "acc": 94.9367088607595
+    },
+    {
+      "fold": 3,
+      "acc": 93.24894514767932
+    },
+    {
+      "fold": 4,
+      "acc": 94.9367088607595
+    },
+    {
+      "fold": 5,
+      "acc": 91.13924050632912
+    }
+  ]
+}

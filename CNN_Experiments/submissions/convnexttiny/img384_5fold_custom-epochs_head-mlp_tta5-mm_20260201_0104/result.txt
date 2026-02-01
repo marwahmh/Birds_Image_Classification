@@ -1,0 +1,3 @@
+82
+
+trained last block of convexNet and used 15th epoch of each fold for eval

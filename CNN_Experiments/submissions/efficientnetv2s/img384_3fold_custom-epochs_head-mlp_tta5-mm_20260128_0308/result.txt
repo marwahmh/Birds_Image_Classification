@@ -1,0 +1,4 @@
+80
+
+Trained for 30 epochs
+Includes last two blocks of efficientnet

@@ -1,0 +1,3 @@
+also gave 81
+
+it was same everything but tried with last epoch from each model
