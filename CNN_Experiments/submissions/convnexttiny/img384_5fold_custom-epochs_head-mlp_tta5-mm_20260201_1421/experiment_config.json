@@ -1,0 +1,26 @@
+{
+  "model_name": "convnext_tiny.fb_in22k_ft_in1k_384",
+  "img_size": 384,
+  "head_type": "mlp",
+  "head_hidden_dim": 512,
+  "head_dropout": 0.3,
+  "tta_variants": 5,
+  "tta_voting": "mean",
+  "ensemble_voting": "mean",
+  "custom_epoch_selection": {
+    "1": 23,
+    "2": 24,
+    "3": 20,
+    "4": 26,
+    "5": 23
+  },
+  "selected_fold_accuracies": {
+    "1": 94.09282700421942,
+    "2": 93.67088607594937,
+    "3": 93.24894514767932,
+    "4": 93.24894514767932,
+    "5": 91.13924050632912
+  },
+  "expected_mean_val_accuracy": 93.08016877637131,
+  "timestamp": "2026-02-01T14:21:17.962800"
+}

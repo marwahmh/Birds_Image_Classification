@@ -74,7 +74,7 @@ class Config:
     # ============================================
     use_transfer_learning = True  # Enable transfer learning strategy
     freeze_backbone_epochs = 10   # Number of epochs with frozen backbone (train only head)
-    unfreeze_epochs = 5           # Number of epochs after unfreezing (fine-tune layers)
+    unfreeze_epochs = 20           # Number of epochs after unfreezing (fine-tune layers)
     # Total epochs = freeze_backbone_epochs + unfreeze_epochs
     
     # Freeze Backbone Always
@@ -84,7 +84,7 @@ class Config:
     
     # Progressive Unfreezing Strategy (only used if freeze_backbone_always=False)
     unfreeze_all_layers = False   # If True, unfreeze all layers. If False, use progressive unfreezing
-    unfreeze_last_n_blocks = 1    # Number of last blocks/stages to unfreeze (only if unfreeze_all_layers=False)
+    unfreeze_last_n_blocks = 2    # Number of last blocks/stages to unfreeze (only if unfreeze_all_layers=False)
     # Block counts by model (for choosing unfreeze_last_n_blocks):
     #   - EfficientNetV2-S: 7 blocks (unfreezing last 2-3 is often optimal)
     #   - ConvNeXt-Tiny/Small/Base: 4 stages (unfreezing last 1-2 is recommended)

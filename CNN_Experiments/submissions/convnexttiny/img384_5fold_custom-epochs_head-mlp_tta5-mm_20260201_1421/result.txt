@@ -1,0 +1,3 @@
+84.5
+
+trained last 2 blocks of convexNet for 30 epochs, and the best of the last few epochs from each fold to try
