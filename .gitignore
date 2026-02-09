@@ -1,4 +1,5 @@
 bdma-07-competition-2026.zip
 bdma-07-competition-2026
-Transformer_Experiments/results/models
-DINO_Experiments/results/dinov2_results/dinov2_models
+Transformer_Experiments\results\models
+DINO_Experiments\results\dinov2_results\dinov2_models
+DINO_Experiments\results\dinov2_results\cropped_images
